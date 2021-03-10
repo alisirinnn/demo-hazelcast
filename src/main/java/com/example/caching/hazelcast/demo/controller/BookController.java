@@ -14,13 +14,19 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/{isbn}")
-    public String getBookNameByIsbn(@PathVariable("isbn") String isbn) {
-        return bookService.getBookNameByIsbn(isbn);
+    @GetMapping("/get-book-with-permanent-cache/{isbn}")
+    public String getBookNameByIsbnWithPermanentCache(@PathVariable("isbn") String isbn) {
+        return bookService.getBookNameByIsbnWithPermanentCache(isbn);
+    }
+
+    @GetMapping("/get-book-with-thirty-seconds-cache/{isbn}")
+    public String getBookNameByIsbnWithThirtySecondsCache(@PathVariable("isbn") String isbn) {
+        return bookService.getBookNameByIsbnWithThirtySecondsCache(isbn);
     }
 
     @PostMapping(value = {"/evict-all-caches"})
     public void evictAllCacheValues() {
         bookService.evictAllCacheValues();
     }
+
 }
